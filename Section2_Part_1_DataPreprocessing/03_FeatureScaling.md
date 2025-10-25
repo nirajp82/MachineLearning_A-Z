@@ -4,7 +4,7 @@ Feature scaling is a crucial preprocessing step in machine learning. It is alway
 
 > ⚠️ **Note:** Feature scaling is always applied to columns.  
 
-Feature scaling is always applied to columns. For example, scaling would be applied to this column, to this column, and so forth, but never across the data inside a row. Remember, feature scaling is always applied to columns.
+Feature scaling is always applied to columns. For example, scaling would be applied to column, but never across the data inside a row. Remember, feature scaling is always applied to columns.
 
 ---
 
