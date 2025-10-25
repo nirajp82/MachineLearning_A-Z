@@ -1,7 +1,3 @@
-Here’s your content rewritten in **clean, simple, and well-formatted Markdown (MD)** for easy reading and understanding:
-
----
-
 # 🧮 Feature Scaling in Machine Learning: Normalization vs Standardization
 
 ## 📘 Introduction to Feature Scaling
