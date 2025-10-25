@@ -77,32 +77,33 @@ To avoid such misleading conclusions, feature scaling is necessary. Comparing sa
 
 ## ⚙️ Applying Normalization
 
-Recall the normalization formula:
-
+**Normalization Formula:**  
 ```text
 Normalized value = (value - min) / (max - min)
-```
+````
 
-We apply this formula to each column independently.
+### Annual Income Normalization
 
-After normalizing the annual income column, the values become:
+| Person | Original Income ($) | Calculation                                             | Normalized Income |
+| ------ | ------------------- | ------------------------------------------------------- | ----------------- |
+| Blue   | 70,000              | (70,000 - 52,000) / (70,000 - 52,000) = 18,000 / 18,000 | 1.0               |
+| Purple | 60,000              | (60,000 - 52,000) / (70,000 - 52,000) = 8,000 / 18,000  | 0.444             |
+| Red    | 52,000              | (52,000 - 52,000) / (70,000 - 52,000) = 0 / 18,000      | 0.0               |
 
-* **Blue person:** 1.0
-* **Purple person:** 0.444
-* **Red person:** 0.0
+### Age Normalization
 
-After normalizing the age column, the values become:
-
-* **Blue person:** 1.0
-* **Purple person:** 0.75
-* **Red person:** 0.0
+| Person | Original Age (Years) | Calculation                   | Normalized Age |
+| ------ | -------------------- | ----------------------------- | -------------- |
+| Blue   | 45                   | (45 - 40) / (45 - 40) = 5 / 5 | 1.0            |
+| Purple | 44                   | (44 - 40) / (45 - 40) = 4 / 5 | 0.8            |
+| Red    | 40                   | (40 - 40) / (45 - 40) = 0 / 5 | 0.0            |
 
 ---
 
 ## 🎯 Comparing Individuals After Normalization
 
 Now, the purple person is almost exactly in the middle between the red and blue persons in terms of income (**0.444**).
-In terms of age, the purple person is closer to the blue person (**0.75 vs. 1.0 and 0.0**).
+In terms of age, the purple person is closer to the blue person (**0.8 vs. 1.0 and 0.0**).
 This balanced scaling allows for fairer comparison across features.
 
 ---
