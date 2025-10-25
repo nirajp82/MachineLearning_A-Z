@@ -1,7 +1,4 @@
-# Machine Learning Workflow: Importing, Modeling, and Evaluating Your ML Model
-
 ## 📘 Introduction
-This guide provides an overview of the **machine learning process**, highlighting the essential steps from data import to model evaluation. The workflow described here aligns with the structure used in practical tutorials throughout this course.
 
 Machine learning projects typically follow a **three-step process**:
 1. Data Pre-processing  
