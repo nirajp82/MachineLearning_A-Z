@@ -21,31 +21,21 @@ There are many scaling techniques, but the two most common are:
 
 ## 🌈 Normalization
 
-Normalization adjusts values so that each feature lies between **0 and 1**.
+Normalization involves taking the minimum value in a column, subtracting it from every value in that column, and then dividing by the difference between the maximum and minimum values. This process adjusts every value in the column so that the resulting values lie between 0 and 1. Normalization adjusts values so that each feature lies between **0 and 1**.
 
 ```
 x' = (x - min(x)) / (max(x) - min(x))
 ```
 
-**How it works:**
-
-* Subtract the minimum value in the column.
-* Divide by the difference between the maximum and minimum.
-
-**Result:**
-All values are scaled between **0 and 1**.
-
 ---
 
 ## 📏 Standardization
 
-Standardization rescales data using the **mean** and **standard deviation**.
+Standardization is a similar process, but instead of subtracting the minimum, it subtracts the average (mean) of the column and divides by the standard deviation. As a result, most values in the column will lie between -3 and 3. However, extreme values or outliers can fall outside this range.
 
-**Formula:**
-[
-x' = \frac{x - \text{mean}(x)}{\text{std}(x)}
-]
-
+```
+x' = (x - mean(x)) / std(x)
+```
 **How it works:**
 
 * Subtract the column’s mean.
