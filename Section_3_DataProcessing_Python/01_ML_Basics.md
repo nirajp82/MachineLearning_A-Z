@@ -64,6 +64,3 @@ y = dataset.iloc[:, -1].values   # Only the last column
 * Features are **inputs** to the model, dependent variable is the **output**
 * Always separate the dataset into **X (features)** and **y (target)** before modeling
 * Ensures clear distinction between what is **given** to the model and what is to be **predicted**
-
-```
-```
