@@ -23,10 +23,9 @@ There are many scaling techniques, but the two most common are:
 
 Normalization adjusts values so that each feature lies between **0 and 1**.
 
-**Formula:**
-[
-x' = \frac{x - \min(x)}{\max(x) - \min(x)}
-]
+```
+x' = (x - min(x)) / (max(x) - min(x))
+```
 
 **How it works:**
 
