@@ -1,137 +1,114 @@
-# 🧮 Feature Scaling in Machine Learning: Normalization vs Standardization
+# Introduction to Feature Scaling
 
-## 📘 Introduction to Feature Scaling
+Feature scaling is a crucial preprocessing step in machine learning. It is always applied to columns of data, never across rows. This means that each feature column is scaled independently to ensure consistent ranges and units across features.
 
-Feature scaling is a crucial **preprocessing step** in machine learning.
-It ensures all features (columns) have consistent ranges and units.
-
-> ⚠️ Feature scaling is **always applied to columns**, not rows.
-> Each feature column is scaled independently.
+Feature scaling is always applied to columns. For example, scaling would be applied to this column, to this column, and so forth, but never across the data inside a row. Remember, feature scaling is always applied to columns.
 
 ---
 
-## 🔧 Types of Feature Scaling
+## Types of Feature Scaling
 
-There are many scaling techniques, but the two most common are:
+There are multiple techniques for feature scaling, but the two main ones are **normalization** and **standardization**.
 
-* **Normalization**
-* **Standardization**
+### Normalization
+
+Normalization involves taking the minimum value in a column, subtracting it from every value in that column, and then dividing by the difference between the maximum and minimum values.  
+This process adjusts every value in the column so that the resulting values lie between **0 and 1**.
+
+### Standardization
+
+Standardization is a similar process, but instead of subtracting the minimum, it subtracts the **average (mean)** of the column and divides by the **standard deviation**.  
+As a result, most values in the column will lie between **-3 and 3**. However, extreme values or outliers can fall outside this range.
+
+In practical tutorials, standardization is often used. For simplicity in intuition tutorials, normalization is demonstrated.
 
 ---
 
-## 🌈 Normalization
+## Illustrative Example: Comparing Individuals
 
-Normalization involves taking the minimum value in a column, subtracting it from every value in that column, and then dividing by the difference between the maximum and minimum values. This process adjusts every value in the column so that the resulting values lie between 0 and 1. Normalization adjusts values so that each feature lies between **0 and 1**.
+Consider a dataset with two columns: **annual income** and **age**.  
+We have three individuals: a **blue person**, a **purple person**, and a **red person**. Their data is as follows:
+
+- **Blue person:** \$70,000 annual income, 45 years old  
+- **Purple person:** \$60,000 annual income, 44 years old  
+- **Red person:** \$52,000 annual income, 40 years old  
+
+The task is to determine which individual the purple person is most similar to based on this data.  
+This is relevant for clustering tasks and algorithms.
+
+---
+
+## Comparing Differences Without Scaling
+
+Let's examine the differences between the purple person and the others:
+
+- **Salary difference with blue person:** \$10,000  
+- **Salary difference with red person:** \$8,000  
+- **Age difference with blue person:** 1 year  
+- **Age difference with red person:** 4 years  
+
+Because salary differences are much larger in magnitude than age differences, unscaled features can cause the salary to dominate the similarity measure.
+
+Due to the large salary differences compared to age differences, one might erroneously conclude that the purple person is closer to the red person because  
+`8,000 < 10,000`.  
+This ignores the smaller but potentially important age differences.
+
+---
+
+## Importance of Feature Scaling
+
+To avoid such misleading conclusions, feature scaling is necessary.  
+Comparing salaries directly to years is like comparing **apples to oranges**.  
+Even if units are consistent, features may relate to different concepts and scales, making scaling essential.
+
+---
+
+## Applying Normalization
+
+Recall the normalization formula:
 
 ```
-x' = (x - min(x)) / (max(x) - min(x))
-```
 
----
-
-## 📏 Standardization
-
-Standardization is a similar process, but instead of subtracting the minimum, it subtracts the average (mean) of the column and divides by the standard deviation. As a result, most values in the column will lie between -3 and 3. However, extreme values or outliers can fall outside this range.
+Normalized value = (value - min) / (max - min)
 
 ```
-x' = (x - mean(x)) / std(x)
-```
-**How it works:**
 
-* Subtract the column’s mean.
-* Divide by its standard deviation.
+We apply this formula to each column independently.
 
-**Result:**
-Most values fall between **-3 and 3**, though outliers may go beyond.
+After normalizing the **annual income** column, the values become:
 
-> In practice, **standardization** is often preferred.
-> For simple intuition and visual examples, **normalization** is easier to demonstrate.
+- **Blue person:** 1.0  
+- **Purple person:** 0.444  
+- **Red person:** 0.0  
 
----
+After normalizing the **age** column, the values become:
 
-## 👥 Example: Comparing Individuals
-
-We have a dataset with two columns — **Annual Income** and **Age** — for three people:
-
-| Person | Annual Income ($) | Age (years) |
-| :----: | :---------------: | :---------: |
-|  Blue  |       70,000      |      45     |
-| Purple |       60,000      |      44     |
-|   Red  |       52,000      |      40     |
-
-We want to find who the **Purple person** is most similar to — this is relevant for clustering algorithms.
+- **Blue person:** 1.0  
+- **Purple person:** 0.75  
+- **Red person:** 0.0  
 
 ---
 
-### 🔍 Without Feature Scaling
+## Comparing Individuals After Normalization
 
-| Comparison     | Salary Difference | Age Difference |
-| :------------- | :---------------: | :------------: |
-| Purple vs Blue |       10,000      |        1       |
-| Purple vs Red  |       8,000       |        4       |
-
-Since salary differences are much larger, it dominates the comparison —
-even though age differences may be equally important.
-
-This could wrongly suggest that **Purple is closer to Red**, just because 8,000 < 10,000.
+Now, the purple person is almost exactly in the middle between the red and blue persons in terms of income (**0.444**).  
+In terms of age, the purple person is closer to the blue person (**0.75 vs. 1.0 and 0.0**).  
+This balanced scaling allows for fairer comparison across features.
 
 ---
 
-## 🚨 Why Feature Scaling Matters
+## Conclusion
 
-Comparing salary ($) to age (years) is like comparing **apples to oranges**.
-Without scaling, features with large numeric ranges can overpower smaller ones,
-leading to biased or misleading results.
-
----
-
-## ⚙️ Applying Normalization
-
-**Formula Reminder:**
-[
-x' = \frac{x - \min(x)}{\max(x) - \min(x)}
-]
-
-### Normalized Annual Income
-
-| Person | Normalized Income |
-| :----: | :---------------: |
-|  Blue  |        1.0        |
-| Purple |       0.444       |
-|   Red  |        0.0        |
-
-### Normalized Age
-
-| Person | Normalized Age |
-| :----: | :------------: |
-|  Blue  |       1.0      |
-| Purple |      0.75      |
-|   Red  |       0.0      |
+This simple example illustrates the importance of feature scaling in machine learning.  
+Proper scaling ensures that features with different units or magnitudes contribute appropriately to similarity measures and model performance.
 
 ---
 
-### 🎯 After Normalization
+## Key Takeaways
 
-* **Purple’s income (0.444)** is between Red (0.0) and Blue (1.0).
-* **Purple’s age (0.75)** is closer to Blue (1.0) than to Red (0.0).
-
-Now the comparison is **balanced** — both features contribute equally.
-
----
-
-## ✅ Conclusion
-
-Feature scaling ensures that no single feature dominates because of its range or units.
-It leads to **fairer comparisons** and **better model performance**.
+- Feature scaling is always applied to **columns**, never across rows.  
+- **Normalization** rescales data to a **0 to 1** range by subtracting the minimum and dividing by the range.  
+- **Standardization** rescales data by subtracting the mean and dividing by the standard deviation, typically resulting in values between **-3 and 3**.  
+- Feature scaling is essential to ensure fair comparison between features with different units or magnitudes.  
 
 ---
-
-## 🗝️ Key Takeaways
-
-| Concept             | Description                                                                 |
-| :------------------ | :-------------------------------------------------------------------------- |
-| **Applied to**      | Columns (features), never rows                                              |
-| **Normalization**   | Scales data between 0 and 1                                                 |
-| **Standardization** | Centers data (mean=0) and scales by standard deviation                      |
-| **Typical range**   | Normalization: 0–1, Standardization: ~-3 to 3                               |
-| **Purpose**         | Ensures fair comparison between features with different units or magnitudes |
