@@ -1,13 +1,14 @@
 # 🧠 Machine Learning Workflow & Feature Scaling
 ---
-
 ## 1️⃣ Machine Learning Process Overview
 
 Machine learning projects typically follow a **three-step process**:
 
 1. **Data Pre-processing**  
-   - Import, clean, and split your data  
-   - Splitting into **training and test sets** ensures model evaluation on **unseen data**, providing an unbiased measure of generalization
+   - Import, clean, and prepare your data  
+   - **Split dataset into training and test sets**  
+     - Ensures model evaluation is based on **unseen data**  
+     - Provides an unbiased measure of how well the model generalizes  
 
 2. **Modeling**  
    - Build, train, and make predictions using machine learning algorithms
@@ -20,11 +21,30 @@ Machine learning projects typically follow a **three-step process**:
 ### 🗝️ Key Takeaways
 
 - ML process steps: **Data Pre-processing → Modeling → Evaluation**  
-- Proper data splitting ensures unbiased evaluation  
+- Proper **data splitting** ensures unbiased evaluation and better generalization  
 
 ---
 
-## 2️⃣ Feature Scaling
+## 2️⃣ Data Preprocessing: Importance of the Training-Test Split
+
+### Overview
+Splitting a dataset into **training and test sets** is one of the most important steps in the machine learning workflow.  
+This ensures that model evaluation is based on **unseen data**, providing an unbiased measure of how well the model generalizes beyond the examples it was trained on.
+
+### Summary
+- Splitting your data into **training and test sets** is critical for reliable model assessment.  
+- Allows you to measure how well your model **generalizes**, rather than just memorizing training examples.
+
+### 🗝️ Key Takeaways
+
+- The **training-test split** provides an unbiased way to evaluate model performance  
+- Common split ratio: **80% training / 20% testing**  
+- The test set must remain **unseen during training** to simulate real-world conditions  
+- Comparing **predicted vs actual outcomes** on the test set helps identify how accurate and generalizable the model is  
+
+---
+
+## 3️⃣ Feature Scaling
 
 Feature scaling is a **crucial preprocessing step** in machine learning.
 
@@ -53,27 +73,6 @@ Normalized value = (value - min) / (max - min)
 Standardized value = (value - mean) / std
 ```
 
-**Calculating Standard Deviation (std):**
-
-1. Compute the mean of the column:
-   [
-   mean = \frac{\sum x_i}{n}
-   ]
-2. Calculate squared differences from the mean:
-   [
-   (x_i - mean)^2
-   ]
-3. Compute variance:
-   [
-   variance = \frac{\sum (x_i - mean)^2}{n} \quad \text{or} \quad \frac{\sum (x_i - mean)^2}{n-1}
-   ]
-4. Take the square root:
-   [
-   std = \sqrt{variance}
-   ]
-
----
-
 ### 🗝️ Key Takeaways for Feature Scaling
 
 * ⚡ Always applied to **columns**, never rows
@@ -83,12 +82,9 @@ Standardized value = (value - mean) / std
 
 ---
 
-## 3️⃣ ✅ Conclusion
+## 4️⃣ ✅ Conclusion
 
 * The ML process is an **iterative, structured approach**:
   **Data Pre-processing → Modeling → Evaluation**
-* Proper feature scaling ensures that **all features contribute appropriately** to similarity measures and model performance
+* Proper **data splitting** and **feature scaling** ensure unbiased evaluation and fair contribution of all features
 * Practicing these steps hands-on improves understanding of **how ML models are built, trained, and evaluated**
-
-```
-```
