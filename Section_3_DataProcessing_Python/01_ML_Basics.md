@@ -1,4 +1,3 @@
-````markdown
 # 🧮 Features and Dependent Variable in Machine Learning
 ---
 
