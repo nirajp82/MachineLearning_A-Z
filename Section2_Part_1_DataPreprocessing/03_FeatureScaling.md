@@ -1,5 +1,4 @@
-````markdown
-# 🧮 Introduction to Feature Scaling
+# Introduction to Feature Scaling
 
 Feature scaling is a crucial preprocessing step in machine learning. It is always applied to columns of data, never across rows. This means that each feature column is scaled independently to ensure consistent ranges and units across features.
 
