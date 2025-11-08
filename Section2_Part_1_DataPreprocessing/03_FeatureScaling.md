@@ -108,6 +108,29 @@ This balanced scaling allows for fairer comparison across features.
 
 ---
 
+## Who is most likely to buy a car?
+
+* **Blue person** has both *highest income* and *highest age*.
+  → Most likely to be financially capable and in a life stage to purchase a car.
+
+* **Purple person** is moderately well-off and close in age to Blue.
+  → Possibly also likely, but slightly less so due to lower income.
+
+* **Red person** has the lowest income and age.
+  → Least likely to afford or prioritize a car purchase.
+
+✅ **Therefore: The Blue person is most likely to buy a car.**
+
+---
+
+## Why scaling mattered
+
+Before scaling, you might have thought the Purple person was “closer” to Red (based on the smaller salary difference).
+But after scaling, you can see that Purple is actually *closer to Blue* overall (especially in age and moderately in income).
+That means Purple’s *behavioral or lifestyle pattern* is probably more similar to Blue’s than Red’s.
+
+So if car-buying behavior tends to cluster with higher income and age, **Purple would cluster near Blue — the “car buyer” group.**
+
 ## ✅ Conclusion
 
 This simple example illustrates the importance of feature scaling in machine learning. Proper scaling ensures that features with different units or magnitudes contribute appropriately to similarity measures and model performance.
