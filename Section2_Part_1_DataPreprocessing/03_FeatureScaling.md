@@ -107,29 +107,26 @@ In terms of age, the purple person is closer to the blue person (**0.8 vs. 1.0 a
 This balanced scaling allows for fairer comparison across features.
 
 ---
+---
 
-## Who is most likely to buy a car?
+## 🧩 Who is the Purple Person Most Similar To?
 
-* **Blue person** has both *highest income* and *highest age*.
-  → Most likely to be financially capable and in a life stage to purchase a car.
+* **Blue person** has both the *highest income* and *highest age*.
+* **Red person** has the *lowest income* and *youngest age*.
+* **Purple person** falls in between, with a *moderate income* and an *age close to Blue’s*.
 
-* **Purple person** is moderately well-off and close in age to Blue.
-  → Possibly also likely, but slightly less so due to lower income.
-
-* **Red person** has the lowest income and age.
-  → Least likely to afford or prioritize a car purchase.
-
-✅ **Therefore: The Blue person is most likely to buy a car.**
+✅ **Therefore: The Purple person is most similar to the Blue person.**
 
 ---
 
-## Why scaling mattered
+## ⚖️ Why Scaling Mattered
 
-Before scaling, you might have thought the Purple person was “closer” to Red (based on the smaller salary difference).
-But after scaling, you can see that Purple is actually *closer to Blue* overall (especially in age and moderately in income).
-That means Purple’s *behavioral or lifestyle pattern* is probably more similar to Blue’s than Red’s.
+Before scaling, one might conclude that the Purple person is closer to the Red person — since the difference in income ($8,000) is smaller than the difference with Blue ($10,000).
+However, this ignores that Purple’s **age (44)** is much closer to Blue’s **(45)** than to Red’s **(40)**.
 
-So if car-buying behavior tends to cluster with higher income and age, **Purple would cluster near Blue — the “car buyer” group.**
+After applying normalization, both income and age are placed on the same 0–1 scale, allowing them to contribute equally to the similarity measure.
+When scaled, the Purple person’s normalized values are **closer to Blue** across both features.
+
 
 ## ✅ Conclusion
 
