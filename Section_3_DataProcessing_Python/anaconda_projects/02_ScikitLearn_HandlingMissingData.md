@@ -181,6 +181,39 @@ X[:, 1:3] = imputer.transform(X[:, 1:3])
 print(X)
 ```
 
+```python
+# Importing the necessary libraries
+import numpy as np
+import pandas as pd
+from sklearn.impute import SimpleImputer
+
+# Load the dataset into a pandas DataFrame
+dataset = pd.read_csv('pima-indians-diabetes.csv')
+
+# Identify missing data (assumes that missing values are already marked as NaN)
+# This returns a count of missing values for each column
+missing_data = dataset.isnull().sum()
+
+# Print the number of missing entries in each column
+print("Missing values in each column before imputation:\n", missing_data)
+
+# Configure an instance of the SimpleImputer class
+# - missing_values=np.nan → tells the imputer which values to treat as missing
+# - strategy='mean' → replaces missing values with the mean value of each column
+imputer = SimpleImputer(missing_values=np.nan, strategy='mean')
+
+# Fit the imputer on the dataset to calculate the mean of each column
+# (The imputer "learns" the mean values from the data)
+imputer.fit(dataset)
+
+# Apply the transformation to replace missing values with their respective column means
+# Returns a NumPy array with all missing values imputed
+dataset_imputed = imputer.transform(dataset)
+
+# Print the updated dataset after imputation
+# Note: The result is a NumPy array, not a DataFrame
+print("\nDataset after imputing missing values:\n", dataset_imputed)
+```
 ---
 
 ### 🧾 Sample Output
