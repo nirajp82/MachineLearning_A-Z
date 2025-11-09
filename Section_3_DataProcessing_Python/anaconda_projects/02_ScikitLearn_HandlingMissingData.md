@@ -1,7 +1,5 @@
 # 🧠 Handling Missing Data in Machine Learning (Using Scikit-Learn)
 
-This README summarizes and expands on **two Udemy lecture sessions** about handling missing data using **Scikit-Learn’s `SimpleImputer`**. It’s designed as a **revision and learning reference** for later review.
-
 ---
 
 ## 📚 Table of Contents
