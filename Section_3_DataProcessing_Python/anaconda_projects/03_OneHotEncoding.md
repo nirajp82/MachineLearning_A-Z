@@ -248,6 +248,3 @@ print(encoded_label)
 * The output of `fit_transform()` is not a NumPy array by default; since most ML models expect NumPy arrays, we convert it using `np.array()`.
 
 ---
-
-```
-```
