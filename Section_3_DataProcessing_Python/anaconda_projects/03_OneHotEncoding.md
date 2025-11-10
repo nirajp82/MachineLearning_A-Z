@@ -1,4 +1,3 @@
-```markdown
 # One-Hot Encoding: Converting Categorical Data into Numbers
 
 ## Introduction
