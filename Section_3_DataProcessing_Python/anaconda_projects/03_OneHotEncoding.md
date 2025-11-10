@@ -94,17 +94,18 @@ No  → 0
 
 ````
 
-This numeric conversion is **safe for binary classification** because it doesn’t introduce any false ordinal relationships.
+This numeric conversion is **safe for binary classification** because it doesn’t introduce any false ordinal relationships.  
+In other words, this numeric conversion does not create an ordering problem and works perfectly for binary outputs.
 
 ---
 
 ## Using Scikit-learn to Encode Categorical Data
 
 ### Tools
-- **ColumnTransformer** — apply transformations to specific columns only while keeping others unchanged.  
-- **OneHotEncoder** — converts categorical features (like Country) into binary columns.  
-- **OrdinalEncoder** — converts ordered/binary categorical columns (like Purchased) into numeric values.  
-- **LabelEncoder + FunctionTransformer** — used to integrate LabelEncoder inside ColumnTransformer when needed.
+- **ColumnTransformer** — allows applying transformations to specific columns only, while keeping others unchanged. This is especially useful for datasets with both numeric and categorical data.  
+- **OneHotEncoder** — converts categorical columns into one-hot encoded form, creating separate binary columns for each unique category. Best for features with no natural order (like Country).  
+- **OrdinalEncoder** — converts categorical columns with a clear order or binary categories (like Purchased) into numeric values (No → 0, Yes → 1).  
+- **LabelEncoder via FunctionTransformer** — used when you want to integrate LabelEncoder inside a ColumnTransformer. LabelEncoder normally works only on 1D arrays, so it needs wrapping to be compatible.
 
 ---
 
@@ -151,7 +152,7 @@ np.set_printoptions(suppress=True, precision=1)
 
 ---
 
-### Optional: Using LabelEncoder inside ColumnTransformer
+## Optional: Using LabelEncoder inside ColumnTransformer
 
 ```python
 from sklearn.preprocessing import FunctionTransformer, LabelEncoder
@@ -174,7 +175,7 @@ print(encoded_label)
 
 ---
 
-## Explanation of Components
+## Explanation
 
 ### One-Hot Encoding for Country
 
@@ -182,7 +183,7 @@ print(encoded_label)
 ('country_encoder', OneHotEncoder(), ['Country'])
 ```
 
-* Converts Country into multiple binary columns — one for each unique value.
+* Converts **Country** into multiple binary columns — one for each unique country.
 * Example: France → [1,0,0], Spain → [0,1,0], Germany → [0,0,1].
 
 ### Ordinal Encoding for Purchased
@@ -191,22 +192,23 @@ print(encoded_label)
 ('purchase_encoder', OrdinalEncoder(), ['Purchased'])
 ```
 
-* Converts `No → 0`, `Yes → 1`.
-* Suitable for binary or ordered categorical columns.
+* Converts `No → 0` and `Yes → 1`.
+* Works for binary or ordered categorical columns.
 
-### LabelEncoder with FunctionTransformer
+### Using LabelEncoder with FunctionTransformer (Commented)
 
-* **Problem:** LabelEncoder expects 1D input, but ColumnTransformer provides 2D.
-* **Solution:** Wrap LabelEncoder inside a function and use **FunctionTransformer** to make it compatible.
-* Output reshaped to 2D for proper integration.
+* **Why FunctionTransformer?**
+  LabelEncoder expects 1D input, but ColumnTransformer provides a 2D array.
+  Wrapping LabelEncoder in a function and using FunctionTransformer allows applying it inside ColumnTransformer.
+* Output is reshaped to 2D to maintain compatibility.
 
 ### remainder='passthrough'
 
-* Keeps numeric columns (Age and Salary) unchanged.
+* Keeps numeric columns (**Age** and **Salary**) unchanged.
 
 ---
 
-## Resulting Encoded Array
+## Resulting Array
 
 ```
 [[ 1.   0.   0.   0.  44. 72000. ]
@@ -231,17 +233,19 @@ print(encoded_label)
 
 ## Key Takeaways
 
-* ML models can’t handle text → categorical data must be numeric.
-* Simple numbering (0, 1, 2) introduces false relationships.
-* **One-Hot Encoding** is ideal for unordered categorical features.
-* Binary columns (e.g., “Yes/No”) can safely be encoded as `1` and `0`.
-* Use **ColumnTransformer** to apply different transformations per column.
-* `remainder='passthrough'` keeps untransformed columns.
-* **OrdinalEncoder** works for binary/ordered categories.
-* **LabelEncoder + FunctionTransformer** allows LabelEncoder in pipelines.
-* Beware: one-hot encoding increases column count — can cause dimensionality issues.
-* Use `fit_transform()` to fit and transform data in one step.
-* The result should be converted to a NumPy array for compatibility with ML models.
+* Machine learning models can’t handle text, so categorical data must be converted into numbers.
+* Simple numbering (0, 1, 2) is misleading because it creates false order relationships.
+* **One-Hot Encoding** is the right choice — it converts text values into binary columns.
+* For binary outputs (like “Yes/No”), you can safely use 1 and 0.
+* Use **ColumnTransformer** and **OneHotEncoder** from Scikit-learn to do this efficiently.
+* The **ColumnTransformer** class is used to apply transformations to specific columns in a dataset.
+* The `'transformers'` argument specifies the type of transformation, the transformer class, and the column indexes to transform.
+* The `'remainder'` argument with value `'passthrough'` keeps columns that are not transformed.
+* **OrdinalEncoder** works for binary or ordered categorical columns.
+* **LabelEncoder with FunctionTransformer** allows integrating LabelEncoder into ColumnTransformer pipelines.
+* Remember: one-hot encoding increases the number of columns — for many unique categories, this can make your dataset large.
+* The **fit_transform()** method of ColumnTransformer allows us to fit and transform at once.
+* The output of `fit_transform()` is not a NumPy array by default; since most ML models expect NumPy arrays, we convert it using `np.array()`.
 
 ---
 
