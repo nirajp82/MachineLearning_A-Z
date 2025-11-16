@@ -5,83 +5,172 @@ Getting your data ready is a key first step in machine learning. Two important p
 
 ### Splitting the Dataset
 
-Splitting the dataset means dividing all your data into two groups:
-- **Training set:** Used to teach your model how to find patterns.
-- **Test set:** Used to test how well your model works on new examples it hasn’t seen before.
+Splitting the dataset means dividing your data into two groups:
 
-The idea is like studying for a test: you learn using your textbook (training set), but on exam day (test set), you face new questions to check your actual understanding.
+* **Training set:** Used to teach your model patterns and relationships in the data.
+* **Test set:** Used to check how well the model performs on new, unseen examples.
 
-**Example Table:**  
-Say you have 10 rows of data on customer purchases:
+Think of it like studying for an exam: you study using the **training set**, and then the **test set** is the actual exam where you see if you really understand.
+
+**Example Table:**
+Suppose you have 10 rows of data on customer purchases:
 
 | Row | Age | Income | Bought Product |
-|-----|-----|--------|---------------|
-| 1   | 24  | 40,000 | Yes           |
-| ... | ... | ...    | ...           |
-|10   | 41  | 54,000 | No            |
+| --- | --- | ------ | -------------- |
+| 1   | 24  | 40,000 | Yes            |
+| 2   | 30  | 48,000 | No             |
+| 3   | 22  | 39,000 | Yes            |
+| 4   | 27  | 52,000 | No             |
+| 5   | 35  | 80,000 | Yes            |
+| 6   | 29  | 61,000 | No             |
+| 7   | 41  | 54,000 | Yes            |
+| 8   | 33  | 58,000 | No             |
+| 9   | 26  | 42,000 | Yes            |
+| 10  | 28  | 50,000 | No             |
 
-You could split this into:
-- Rows 1–8 for training (learning)
-- Rows 9–10 for testing (checking)
+A common split is:
 
-Now your model only learns from the first 8 rows, and the last 2 rows let you see if it really understands new cases.
+* **Rows 1–8** → Training set
+* **Rows 9–10** → Test set
+
+Now, the model **learns only from the training set**. The test set is kept separate to **evaluate real performance**.
+
+**Tip:** If your dataset is small, you can use **cross-validation** to make the most of your data while still testing generalization.
+
+---
 
 ### Feature Scaling
 
-Feature scaling is about making sure all numbers are on a similar level. This is important because some features could have much bigger numbers than others and might unfairly influence the model.
+Feature scaling ensures that all numerical features have **similar ranges**. Without it, features with larger numbers can dominate smaller ones, which may mislead the model.
 
-**Example:**  
-Suppose you have these two features:
-- Age: ranges from 20 to 60
-- Income: ranges from 30,000 to 120,000
+**Example:**
 
-With these values, “income” might dominate “age” in the way your model makes predictions.
+* Age: 20–60
+* Income: 30,000–120,000
 
-**Popular Scaling Methods:**
-**Popular Scaling Methods:**
+If you don’t scale, the model may focus mostly on income because the numbers are larger, ignoring age.
 
-- **Standardization:** Moves data so it’s centered around 0, with a typical spread of 1.  
-  Example: Income mean is 60,000, standard deviation is 15,000.  
-  Standardized income for $75,000$:
+---
+
+### Popular Scaling Methods
+
+#### 1️⃣ Standardization (Z-score)
+
+Standardization centers data around **0** and scales it based on the **standard deviation**.
+
+**Formula:**
+[
+X_{\text{scaled}} = \frac{X - \mu}{\sigma}
+]
+Where:
+
+* (X) = original value
+* (\mu) = mean of the training data
+* (\sigma) = standard deviation of the training data
+
+**Examples:**
+
+* Income: mean = 60,000, std = 15,000
+
+  * Original income = 75,000
+
   ```
-  standardized = (75,000 - 60,000) / 15,000 = 1
+  (75,000 - 60,000) / 15,000 = 1
   ```
 
-- **Min-Max Scaling:** Shrinks everything to be between 0 and 1.  
-  Example: Age min is 20, max is 60.  
-  Min-max scaled value for age $40$:
+* Age: mean = 35, std = 10
+
+  * Original age = 50
+
   ```
-  min_max = (40 - 20) / (60 - 20) = 0.5
+  (50 - 35) / 10 = 1.5
   ```
 
-### Why Scale After Splitting?
+* Exam score: mean = 70, std = 10
 
-Scaling should **always be done after** splitting your dataset. If you scale before splitting, your test data influences the scaling, and this “leaks” information from the test set into training, which is unfair—like seeing test questions in advance.
+  * Original score = 80
 
-**Correct Way (with Example):**
-1. **Split data** into training and test sets.
-2. **Fit scaler** only on training data.
-   - If average income in training is 60,000, standard deviation is 15,000, use those numbers.
-3. **Apply scaler** (using the values from training) to both training and test sets.
+  ```
+  (80 - 70) / 10 = 1
+  ```
 
-**Wrong Way (what to avoid):**
-- Scale all data first, then split. This lets test data influence scaling, which could give you better test results than you’d get in real life.
+**Interpretation:** A Z-score of **1** means the value is **1 standard deviation above the mean**.
+
+---
+
+#### 2️⃣ Min-Max Scaling
+
+Min-Max scaling rescales values to a **fixed range**, usually 0–1.
+
+**Formula:**
+[
+X_{\text{scaled}} = \frac{X - X_{\min}}{X_{\max} - X_{\min}}
+]
+
+**Examples:**
+
+* Age: min = 20, max = 60
+
+  * Original age = 40
+
+  ```
+  (40 - 20) / (60 - 20) = 0.5
+  ```
+
+* Income: min = 30,000, max = 120,000
+
+  * Original income = 75,000
+
+  ```
+  (75,000 - 30,000) / (120,000 - 30,000) = 0.5
+  ```
+
+* Exam score: min = 50, max = 100
+
+  * Original score = 80
+
+  ```
+  (80 - 50) / (100 - 50) = 0.6
+  ```
+
+**Tip:** Standardization is better if your data has **outliers**, while Min-Max scaling is more sensitive to them.
+
+---
+
+### Why Scale After Splitting
+
+**Always scale after splitting.**
+
+**Why:** Scaling before splitting uses information from the test set, which **leaks data** into training. This makes your model appear more accurate than it really is.
+
+**Correct Steps:**
+
+1. Split data into training and test sets.
+2. Fit the scaler **only on training data**.
+3. Transform both training and test sets using the scaler.
+
+**Wrong:** Scaling first, then splitting — this allows the test set to influence scaling and gives an unfair advantage.
+
+---
 
 ### Key Takeaways
 
-- Always split data before scaling or other preprocessing.
-- Scale features after splitting—never before—to avoid unfair advantages (data leakage).
-- Fit your scaler on the training set only, then use it to scale both sets.
-- Scaling puts all features on an even playing field, making the model learn better.
-- The whole reason for the test set is to measure real performance—keep it separate!
+* Always **split first, then scale**.
+* Fit scalers **on training data only**, then transform both sets.
+* Scaling puts all features on a level playing field, helping the model learn efficiently.
+* The test set must remain separate to measure **real-world performance**.
+* Use cross-validation for small datasets to maximize data usage.
 
-  # Import libraries
+---
+
+### Example Code
+
+```python
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
-# Example data (rows: samples, columns: features)
-# Let's imagine columns are: Age, Income
+# Example data: columns are Age, Income
 data = np.array([
     [24, 40000],
     [30, 48000],
@@ -95,26 +184,22 @@ data = np.array([
     [28, 50000]
 ])
 
-# 1. Split the dataset into training and test sets (80% train, 20% test)
+# 1. Split the dataset (80% train, 20% test)
 train_data, test_data = train_test_split(data, test_size=0.2, random_state=42)
 
-# 2. Create the scaler (choose one: StandardScaler or MinMaxScaler)
-scaler = StandardScaler()  # or use MinMaxScaler()
+# 2. Create a scaler (StandardScaler or MinMaxScaler)
+scaler = StandardScaler()  # or MinMaxScaler()
 
-# 3. Fit the scaler only on the training data
+# 3. Fit only on training data
 scaler.fit(train_data)
 
-# 4. Transform BOTH training and test data using the scaler
+# 4. Transform both training and test sets
 train_scaled = scaler.transform(train_data)
 test_scaled = scaler.transform(test_data)
 
-# Print to see the results
+# Print results
 print("Original training data:\n", train_data)
 print("\nScaled training data:\n", train_scaled)
 print("\nOriginal test data:\n", test_data)
 print("\nScaled test data:\n", test_scaled)
-
-
-***
-
-If you’d like, I can add code snippets or even graphical visualizations to make these examples even clearer. Let me know if you want code!
+```
