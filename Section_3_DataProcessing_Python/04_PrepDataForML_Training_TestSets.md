@@ -41,14 +41,24 @@ Now, the model **learns only from the training set**. The test set is kept separ
 
 ### Feature Scaling
 
-Feature scaling ensures that all numerical features have **similar ranges**. Without it, features with larger numbers can dominate smaller ones, which may mislead the model.
+Feature scaling is the process of adjusting the range of numerical features so that they are on a similar scale. Many machine learning algorithms, such as K-Nearest Neighbors (KNN), Logistic Regression, and Neural Networks, are sensitive to the magnitude of numbers.
+
+Without scaling, features with larger values can dominate the learning process, while smaller-valued features may be ignored, even if they are important.
+
+- Feature: In machine learning, a feature is any individual measurable property or characteristic of your data. For example: Age, Income, Height, Weight, or Exam Score. Each column in your dataset usually represents one feature.
+- Scaling: Scaling means changing the range of values without changing the relationships between them. You are essentially compressing or stretching the numbers so they are comparable.
 
 **Example:**
 
 * Age: 20–60
 * Income: 30,000–120,000
 
-If you don’t scale, the model may focus mostly on income because the numbers are larger, ignoring age.
+If we feed this data directly into a model without scaling, the model may focus mostly on income because the numbers are larger, ignoring age.
+- The Income feature has much larger numbers than Age.
+- The model may consider Income more “important” simply because of its magnitude, not because it actually matters more.
+- his can bias the predictions and reduce model accuracy.
+
+Scaling fixes this by bringing all features to a comparable scale, without changing the relationships between values. After scaling, the model can learn equally from Age and Income.
 
 ---
 
