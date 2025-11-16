@@ -59,15 +59,17 @@ If you don’t scale, the model may focus mostly on income because the numbers a
 Standardization centers data around **0** and scales it based on the **standard deviation**.
 
 **Formula:**
-[
-X_{\text{scaled}} = \frac{X - \mu}{\sigma}
-]
+
+```
+X_scaled = (X - μ) / σ
+```
+
 Where:
 
-* (X) = original value
-* (\mu) = mean of the training data
-* (\sigma) = standard deviation of the training data
-
+* `X` = original value
+* `μ` = mean of the training data
+* `σ` = standard deviation of the training data
+  
 **Examples:**
 
 * Income: mean = 60,000, std = 15,000
@@ -103,9 +105,10 @@ Where:
 Min-Max scaling rescales values to a **fixed range**, usually 0–1.
 
 **Formula:**
-[
-X_{\text{scaled}} = \frac{X - X_{\min}}{X_{\max} - X_{\min}}
-]
+
+```
+X_scaled = (X - X_min) / (X_max - X_min)
+```
 
 **Examples:**
 
