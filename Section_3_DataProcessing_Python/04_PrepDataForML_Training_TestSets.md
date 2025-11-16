@@ -38,16 +38,21 @@ Suppose you have these two features:
 With these values, “income” might dominate “age” in the way your model makes predictions.
 
 **Popular Scaling Methods:**
-- **Standardization:** Moves data so it’s centered around 0, with a typical spread of 1.
-  - Example: Income mean is 60,000, standard deviation is 15,000. Income of 75,000 becomes:
-    $$
-    \text{Standardized} = \frac{75,000 - 60,000}{15,000} = 1
-    $$
-- **Min-Max Scaling:** Shrinks everything to be between 0 and 1.
-  - Example: Age min is 20, max is 60. Age of 40 becomes:
-    $$
-    \text{Min-Max} = \frac{40 - 20}{60 - 20} = 0.5
-    $$
+**Popular Scaling Methods:**
+
+- **Standardization:** Moves data so it’s centered around 0, with a typical spread of 1.  
+  Example: Income mean is 60,000, standard deviation is 15,000.  
+  Standardized income for $75,000$:
+  ```
+  standardized = (75,000 - 60,000) / 15,000 = 1
+  ```
+
+- **Min-Max Scaling:** Shrinks everything to be between 0 and 1.  
+  Example: Age min is 20, max is 60.  
+  Min-max scaled value for age $40$:
+  ```
+  min_max = (40 - 20) / (60 - 20) = 0.5
+  ```
 
 ### Why Scale After Splitting?
 
