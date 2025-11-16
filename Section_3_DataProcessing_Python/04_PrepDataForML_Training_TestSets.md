@@ -5,12 +5,14 @@ Getting your data ready is a key first step in machine learning. Two important p
 
 ### Splitting the Dataset
 
-Splitting the dataset means dividing your data into two groups:
+Dataset splitting is the process of dividing your data into **two separate groups** so you can train and evaluate your model properly.
 
-* **Training set:** Used to teach your model patterns and relationships in the data.
-* **Test set:** Used to check how well the model performs on new, unseen examples.
+* **Training set:** Used to teach the model patterns and relationships in the data.
+* **Test set:** Used to check how well the model performs on **new, unseen examples**.
 
-Think of it like studying for an exam: you study using the **training set**, and then the **test set** is the actual exam where you see if you really understand.
+Think of it like studying for an exam: the **training set** is your study material, and the **test set** is the actual exam to see if you really understand the concepts.
+
+> Splitting ensures the model learns from one set of data but is evaluated on completely unseen data, giving a fair measure of its performance.
 
 **Example Table:**
 Suppose you have 10 rows of data on customer purchases:
